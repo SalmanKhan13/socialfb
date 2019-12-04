@@ -1,0 +1,30 @@
+<%- layout('layouts/main') %>
+<div class="row p-2">
+  <div class="col-md-3">
+    <div class="card">
+      <!-- <div class="card-body text-center">
+        <h5>UserName</h5>
+        <h5 class="card-title"><%= detail.username %></h5>
+        <hr />
+        <h6> Media_Count</h6><%=detail.media_count %> <i class="fas fa-camera"></i> -
+        <h6> Account_Type</h6> <%=detail.account_type %> <i class="fas fa-heart"></i> -
+      </div>
+      -->
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="row">
+      <% resp.forEach(function( data ) { %>
+      <div class="col-md-4">
+        <div class="card mb-2 animated bounceInUp">
+          <img src="<%= data.media_url %>" class="card-img-top" />
+          <div class="card-body">
+            <p>Caption <%= data.caption %></p>
+            <p class="text-muted"><%= data.timestamp %></p>
+          </div>
+        </div>
+      </div>
+      <% })%>
+    </div>
+  </div>
+</div>
