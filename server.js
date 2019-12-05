@@ -23,16 +23,10 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
-//app.get('/auth', authUser);
-
-
-app.get('/salman', (request, response) => {
-  response.send('Hello Boys');
-});
-
 app.get('/', (req, res) => {
   res.render('index.ejs');
 });
+
 
 app.get('/login', (request, response) => {
   response.redirect(config.fb.auth_url);
@@ -82,9 +76,6 @@ app.get('/auth', (req, res) => {
       .catch(err => {
         console.error(err)
       })
-
-
-
   })
     .catch((err) => {
       console.log(err);
@@ -112,12 +103,14 @@ app.get('/details', (req, res) => {
           const resp = response.data;
           const { instagram_business_account } = resp;
           const insta_id = instagram_business_account.id;
-          console.log(insta_id)
-          axios.get(`https://graph.facebook.com/v5.0/${insta_id}/media?fields=id,media_type,media_url,owner,timestamp&access_token=${access_token}`).then(response => {
+          // console.log(insta_id)
+          // /media?fields=id,caption,media_type,comments,replies,username,text,media_url,like_count,owner,timestamp,comments_count
+          axios.get(`https://graph.facebook.com/v5.0/${insta_id}/media?fields=id,caption,media_type,comments,replies,username,text,media_url,like_count,owner,timestamp,comments_count&access_token=${access_token}`).then(response => {
             //res.send(response.data);
             const resp = response.data;
             console.log(resp);
-            res.render('profile', { resp: resp });
+            res.render(resp.data);
+            // res.render('profile', { resp: resp });
             //res.render('profile', resp);
           }).catch((err) => {
             console.log(err);
@@ -157,7 +150,7 @@ const options = {
 
 const port = process.env.PORT || 7777;
 const port1 = process.env.PORT || 2222;
-const server1 = http.createServer(app).listen(port1, function () {
+const server1 = http.createServer(options, app).listen(port1, function () {
 
   console.log("Express http server listening on port " + port1);
 });
