@@ -2,6 +2,18 @@
 <div class="row p-2">
   <div class="col-md-3">
     <div class="card">
+      <img src="<%= respdetails.profile_picture_url %>" class="card-img-top" />
+      <div class="card-body text-center">
+        <h5 class="card-title"><%= respdetails.name %></h5>
+        <%=respdetails.username%>
+        <hr />
+        <%=respdetails.media_count %> <i class="fas fa-camera"></i> -
+        <%=respdetails.follows_count %> <i class="fas fa-heart"></i> -
+        <%=respdetails.followers_count %> <i class="fas fa-users"></i>
+      </div>
+      <div class="card-footer">
+        <a href="<%=respdetails.website %>" class="btn btn-success btn-block" target="_blank">Website</a>
+      </div>
     </div>
   </div>
   <div class="col-md-9">
@@ -13,13 +25,13 @@
           <div class="card-body">
             <p>Caption <%= data.caption %></p>
             <p>Timestamp</p>
-            <p class="text-muted"><%= data.timestamp %></p>
+            <p class="text"><%= data.timestamp %></p>
             <p>Likes_Count</p>
-            <p class="text-muted"><%= data.likes_count %></p>
+            <p class="text"><%= data.likes_count %></p>
             <p>MediaType</p>
-            <p class="text-muted"><%= data.media_type %></p>
+            <p class="text"><%= data.media_type %></p>
             <p>Comments_Count</p>
-            <p class="text-muted"><%= data.comments_count %></p>
+            <p class="text"><%= data.comments_count %></p>
 
           </div>
         </div>

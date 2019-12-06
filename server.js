@@ -34,7 +34,7 @@ app.get('/login', (request, response) => {
 
 app.get('/auth', (req, res) => {
   var str = req.query.code;
-  // str = str.substring(0, str.length - 2);
+  // str = str.substring(0, str.length - 2);  
   // console.log(str);
   let params = {
     client_id: '3302286319812448',
@@ -105,13 +105,19 @@ app.get('/details', (req, res) => {
           const insta_id = instagram_business_account.id;
           // console.log(insta_id)
           // /media?fields=id,caption,media_type,comments,replies,username,text,media_url,like_count,owner,timestamp,comments_count
+          //17841407469741005?fields=biography,followers_count,follows_count,media_count,profile_picture_url,username,website,name
           axios.get(`https://graph.facebook.com/v5.0/${insta_id}/media?fields=id,caption,media_type,comments,replies,username,text,media_url,like_count,owner,timestamp,comments_count&access_token=${access_token}`).then(response => {
-            //res.send(response.data);
             const resp = response.data;
             console.log(resp);
-            res.render(resp.data);
-            // res.render('profile', { resp: resp });
-            //res.render('profile', resp);
+
+            axios.get(`https://graph.facebook.com/v5.0/${insta_id}?fields=biography,followers_count,follows_count,media_count,profile_picture_url,username,website,name&access_token=${access_token}`).then(response => {
+              const respdetails = response.data;
+
+
+              res.render('profile', { resp: resp, respdetails: respdetails });
+            }).catch((err) => {
+              console.log(err);
+            })
           }).catch((err) => {
             console.log(err);
           })
@@ -121,7 +127,6 @@ app.get('/details', (req, res) => {
       }).catch((err) => {
         console.log(err);
       })
-
     })
 });
 
@@ -150,11 +155,11 @@ const options = {
 
 const port = process.env.PORT || 7777;
 const port1 = process.env.PORT || 2222;
-const server1 = http.createServer(options, app).listen(port1, function () {
+const server1 = http.createServer(app).listen(port1, function () {
 
   console.log("Express http server listening on port " + port1);
 });
-const server = https.createServer(app).listen(port, '0.0.0.0', function () {
+const server = https.createServer(options, app).listen(port, '0.0.0.0', function () {
 
   console.log("Express https server listening on port " + port);
 });
