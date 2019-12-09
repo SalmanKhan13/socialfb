@@ -9,6 +9,9 @@ const UserSchema = new mongoose.Schema({
   },
   expires_in: {
     type: Number
+  },
+  user_id: {
+    type: String
   }
 });
 
