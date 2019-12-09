@@ -217,9 +217,8 @@ app.get('/detail', (req, res) => {
         console.log(responses);
         axios.get(`https://graph.instagram.com/me/media?fields=id,caption,media_url,thumbnail_url,timestamp&access_token=${access_token}`).then(response => {
           //res.send(response.data);
-          //, { detail: responses, resdata: resdata }
           const resdata = response.data;
-          res.render('profile');
+          res.render('profileInsta', { detail: responses, resdata: resdata });
         }).catch((err) => {
           console.log(err);
         });
