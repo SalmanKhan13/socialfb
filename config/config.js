@@ -6,9 +6,9 @@ var in_client_id = '3302286319812448',
 
 var in_clientt_id = '445969309446550',
   in_clientt_secret = '291958d2c06000112ee51d34657b6beb',
-  in_redirect_uri = 'https://insta.humwell.com:8888/auth',
-  in_authh_url = 'https://api.instagram.com/oauth/authorize?app_id=' + in_client_id +
-    '&redirect_uri=' + in_redirect_uri + '&scope=user_profile,user_media' + '&response_type=code';
+  in_redirect_urii = 'https://insta.humwell.com:7777/auth',
+  in_authh_url = 'https://api.instagram.com/oauth/authorize?app_id=' + in_clientt_id +
+    '&redirect_uri=' + in_redirect_urii + '&scope=user_profile,user_media' + '&response_type=code';
 
 
 var db_user = 'salman',

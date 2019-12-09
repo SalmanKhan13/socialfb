@@ -150,7 +150,7 @@ app.get('/handleauth', (req, res) => {
     app_id: '445969309446550',
     app_secret: '291958d2c06000112ee51d34657b6beb',
     grant_type: 'authorization_code',
-    redirect_uri: 'https://insta.humwell.com:8888/auth',
+    redirect_uri: 'https://insta.humwell.com:7777/handleauth',
     code: str
   };
 
@@ -217,8 +217,9 @@ app.get('/detail', (req, res) => {
         console.log(responses);
         axios.get(`https://graph.instagram.com/me/media?fields=id,caption,media_url,thumbnail_url,timestamp&access_token=${access_token}`).then(response => {
           //res.send(response.data);
+          //, { detail: responses, resdata: resdata }
           const resdata = response.data;
-          res.render('profile', { detail: responses, resdata: resdata });
+          res.render('profile');
         }).catch((err) => {
           console.log(err);
         });
@@ -363,10 +364,10 @@ app.get('/test', (req, res) => {
 
 
 
-// const options = {
-//   key: fs.readFileSync('/etc/letsencrypt/archive/insta.humwell.com/privkey1.pem'),
-//   cert: fs.readFileSync('/etc/letsencrypt/archive/insta.humwell.com/cert1.pem')
-// }
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/archive/insta.humwell.com/privkey1.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/archive/insta.humwell.com/cert1.pem')
+}
 
 const port = process.env.PORT || 7777;
 const port1 = process.env.PORT || 2222;
@@ -374,7 +375,7 @@ const server1 = http.createServer(app).listen(port1, function () {
 
   console.log("Express http server listening on port " + port1);
 });
-const server = https.createServer(app).listen(port, '0.0.0.0', function () {
+const server = https.createServer(options, app).listen(port, '0.0.0.0', function () {
 
   console.log("Express https server listening on port " + port);
 });
